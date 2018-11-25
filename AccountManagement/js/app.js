@@ -10,10 +10,6 @@ App.config(function ($routeProvider) {
             templateUrl: 'Views/AccountsView/edit.htm',
             controller: 'EditController'
         })
-        .when('/delete', {
-            templateUrl: 'Views/AccountsView/delete.htm',
-            controller: 'DeleteController'
-        })
         .when('/create', {
             templateUrl: 'Views/AccountsView/create.htm',
             controller: 'CreateController'
@@ -25,6 +21,12 @@ App.config(function ($routeProvider) {
 
 App.controller('HomeController', function ($scope, AccountResource) {
     getAccounts();
+
+    $scope.deleteAccount = function(id) {
+        AccountResource.deleteAccountById(id).then( function (res) {
+            console.log(res);
+        });
+    };
 
     function getAccounts() {
         AccountResource.getAccounts().then(function (accounts) {
@@ -65,10 +67,6 @@ App.controller('EditController', function ($scope, AccountResource, $route) {
         });
     };
 
-});
-
-App.controller('DeleteController', function ($scope) {
-    $scope.message = "Delete View Created";
 });
 
 App.controller('CreateController', function ($scope, AccountResource) {

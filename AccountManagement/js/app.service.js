@@ -20,5 +20,9 @@ AccountService.factory('AccountResource', function ($http){
         return $http.put(baseUrl + '/accounts/' + account.Id, account);
     };
 
+    AccountResource.deleteAccountById = function(accountid) {
+        return $http.delete(baseUrl + '/accounts/' + accountid);
+    };
+
     return AccountResource;
 });
