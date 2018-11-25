@@ -23,33 +23,70 @@ App.config(function ($routeProvider) {
         });
 });
 
-App.controller('HomeController', function($scope, AccountResource) {
+App.controller('HomeController', function ($scope, AccountResource) {
     getAccounts();
 
     function getAccounts() {
-        AccountResource.getAccounts().then(function(accounts) {
+        AccountResource.getAccounts().then(function (accounts) {
             console.log(accounts);
             $scope.accounts = accounts.data;
-        },function (error){
+        }, function (error) {
             $scope.status = 'Unable to load account data: ' + error.message;
         });
     }
 });
 
-App.controller('EditController', function($scope) {
-    $scope.message = "Edit View Created";
+App.controller('EditController', function ($scope, AccountResource, $route) {
+
+    var editAccountId = $route.current.params.id;
+    AccountResource.getAccountById(editAccountId).then(function (account) {
+        // TODO: concider account from response after connect to local web api
+        loadAccount(account.data);
+        console.log($scope.account);
+    });
+
+    function loadAccount (account) {
+        $scope.account = {};
+        $scope.account.Id = account.Id;
+        $scope.account.Username = account.Username;
+        $scope.account.Firstname = account.Firstname;
+        $scope.account.Lastname = account.Lastname;
+        $scope.account.DateOfBirth = account.DateOfBirth;
+        $scope.account.Email = account.Email;
+        $scope.account.Phone = account.Phone;
+        $scope.account.Mobile = account.Mobile;
+    }
+
+    $scope.updateAccount = function() {
+        AccountResource.updateAccount($scope.account).then(function (res) {
+            $scope.account = res.data;
+        }, function (error) {
+            $scope.status = 'Error occured on updating new account';
+        });
+    };
+
 });
 
-App.controller('DeleteController', function($scope) {
+App.controller('DeleteController', function ($scope) {
     $scope.message = "Delete View Created";
 });
 
-App.controller('CreateController', function($scope, AccountResource) {
-    function addAccount() {
-        AccountResource.addAccount().then(function(res) {
+App.controller('CreateController', function ($scope, AccountResource) {
+
+    $scope.account = {};
+
+    $scope.addAccount = function () {
+        var account = {
+            'username': $scope.account.username,
+            'password': $scope.account.password,
+            'email': $scope.email
+        };
+
+        AccountResource.addAccount(account).then(function (res) {
             console.log(res);
-        }, function(error) {
+        }, function (error) {
             $scope.status = 'Error occured on creating new account';
         });
-    }
+
+    };
 });

@@ -1,3 +1,49 @@
 ﻿<div class="row jumbotron">
-    <h2>{{message}}</h2>
+    <h1 class="text-center">Edit Account</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-9 col-md-offset-1">
+            <table class="table">
+                <tr>
+                    <td class="text-right">Username</td>
+                    <td class="text-center">{{account.Username}}</td>
+                </tr>
+                <tr>
+                    <td class="text-right">Email</td>
+                    <td class="text-center">
+                        <input type="text" ng-model="account.Email">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">Firstname</td>
+                    <td class="text-center">
+                        <input type="text" ng-model="account.Firstname">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">Date of birtd</td>
+                    <td class="text-center">
+                        <input type="text" ng-model="account.DateOfBirth">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">Phone</td>
+                    <td class="text-center">
+                        <input type="text" ng-model="account.Phone">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-right">Mobile</td>
+                    <td class="text-center">
+                        <input type="text" ng-model="account.Mobile">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button ng-click="updateAccount()" class="btn-primary">Update</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

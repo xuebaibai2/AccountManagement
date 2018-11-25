@@ -16,16 +16,18 @@
                         <th>Date of birth</th>
                         <th>Phone</th>
                         <th>Mobile</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tr ng-repeat="account in accounts | filter:textFilter">
-                    <td>{{account.username}}</td>
-                    <td>{{account.email}}</td>
-                    <td>{{account.firstname}}</td>
-                    <td>{{account.lastname}}</td>
-                    <td>{{account.dateofbirth}}</td>
-                    <td>{{account.phone}}</td>
-                    <td>{{account.mobile}}</td>
+                    <td>{{account.Username}}</td>
+                    <td>{{account.Email}}</td>
+                    <td>{{account.Firstname}}</td>
+                    <td>{{account.Lastname}}</td>
+                    <td>{{account.DateOfBirth}}</td>
+                    <td>{{account.Phone}}</td>
+                    <td>{{account.Mobile}}</td>
+                    <td><a href="#!edit?id={{account.Id}}" class="btn btn-default">Edit</button></td>
                 </tr>
             </table>
         </div>
