@@ -75,6 +75,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="js\app.js" />
+    <Content Include="js\app.service.js" />
     <Content Include="packages.config" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
