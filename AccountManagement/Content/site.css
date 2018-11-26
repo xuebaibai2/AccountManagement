@@ -21,3 +21,11 @@ button[disabled="disabled"] {
   opacity: 0.4;
   cursor: not-allowed !important;
 }
+
+.home-table {
+  font-size: 0.8rem;
+}
+
+.edit-item-div {
+  margin-bottom: 10px;
+}
