@@ -1,8 +1,8 @@
 ﻿var AccountService = angular.module('AccountService', []);
 
 AccountService.factory('AccountResource', function ($http){
-    var baseUrlProd = "http://demo5365007.mockable.io/accounts/";
-    var baseUrl = "http://localhost:28308/api/users/";
+    var baseUrl = "https://accountmanagementpractice.azurewebsites.net/api/users/";
+    var baseUrlDev = "http://localhost:28308/api/users/";
     var AccountResource = {};
 
     AccountResource.getAccounts = function() {
