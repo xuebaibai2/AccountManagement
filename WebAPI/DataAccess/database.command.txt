@@ -1,0 +1,8 @@
+﻿Init EF Migration:
+Enable-Migrations -ContextTypeName AccountContext -MigrationsDirectory Migrations\AccountManagement
+
+Add new Migration: (add name at last)
+add-migration -ConfigurationTypeName WebAPI.Migrations.AccountManagement.Configuration "MigrationName"
+
+Update Database:
+update-database -ConfigurationTypeName WebAPI.Migrations.AccountManagement.Configuration
