@@ -901,11 +901,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AccountsView\create.html" />
-    <Content Include="Views\AccountsView\delete.html" />
-    <Content Include="Views\AccountsView\edit.html" />
-    <Content Include="Views\AccountsView\home.html" />
-    <Content Include="Views\AccountsView\read.html" />
+    <Content Include="Views\AccountsView\create.htm" />
+    <Content Include="Views\AccountsView\edit.htm" />
+    <Content Include="Views\AccountsView\home.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
