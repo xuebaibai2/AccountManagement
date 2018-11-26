@@ -4,51 +4,58 @@
             <i class="fas fa-chevron-left"> <a href="#!">Home</a></i>
         </span>
     </div>
+    <div ng-show="updateStatus" class="alert alert-success">
+            <strong>Success</strong> Account updated
+    </div>
     <h1 class="text-center">Edit Account</h1>
     <hr>
     <div class="row">
-        <div class="col-md-9 col-md-offset-1">
-            <table class="table">
-                <tr>
-                    <td class="text-right">Username</td>
-                    <td class="text-center">{{account.Username}}</td>
+            <div class="col-md-6 col-md-offset-3">
+            <form name="editForm">
+            <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" name="username" ng-model="account.Username" class="form-control input-lg"
+                        disabled>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" ng-model="account.Email" class="form-control input-lg"
+                        ng-required="true">
+                    <h5 class="text-danger" ng-show="editForm.email.$touched && editForm.email.$error.required">The
+                        Email is required.</h5>
+                    <h5 class="text-danger" ng-show="editForm.email.$error.email">Please enter correct email format.</h5>
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input id="firstname" type="text" name="firstname" ng-model="account.Firstname" class="form-control input-lg"
+                        ng-required="true">
+                    <h5 class="text-danger" ng-show="editForm.firstname.$touched && editForm.firstname.$invalid">The
+                        Firstname is required.</h5>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input id="lastname" type="text" name="lastname" ng-model="account.Lastname" class="form-control input-lg"
+                        ng-required="true">
+                    <h5 class="text-danger" ng-show="editForm.lastname.$touched && editForm.lastname.$invalid">The
+                        Lastname is required.</h5>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Data of Birth</label>
+                    <input id="dob" type="text" ng-model="account.DateOfBirth" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="text" ng-model="account.Phone" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile</label>
+                    <input id="mobile" type="text" ng-model="account.Mobile" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                        <button ng-click="updateAccount()" class="btn btn-primary" ng-disabled="editForm.$invalid">Update</button>
+                </div>
                 </tr>
-                <tr>
-                    <td class="text-right">Email</td>
-                    <td class="text-center">
-                        <input type="text" ng-model="account.Email">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-right">Firstname</td>
-                    <td class="text-center">
-                        <input type="text" ng-model="account.Firstname">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-right">Date of birtd</td>
-                    <td class="text-center">
-                        <input type="text" ng-model="account.DateOfBirth">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-right">Phone</td>
-                    <td class="text-center">
-                        <input type="text" ng-model="account.Phone">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-right">Mobile</td>
-                    <td class="text-center">
-                        <input type="text" ng-model="account.Mobile">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center" colspan="2">
-                        <button ng-click="updateAccount()" class="btn btn-primary">Update</button>
-                    </td>
-                </tr>
-            </table>
+            </form>
         </div>
     </div>
 </div>

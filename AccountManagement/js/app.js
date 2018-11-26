@@ -24,12 +24,17 @@ App.config(function ($routeProvider) {
 });
 
 App.controller('PasswordController', function($scope, AccountResource, $route) {
-    $scope.nav = ['/home', '/password'];
+    $scope.updateStatus = false;
     var editAccountId = $route.current.params.id;
     $scope.newPassword = '';
     $scope.resetBtnClicked = function() {
         AccountResource.resetPasswordById(editAccountId, $scope.newPassword).then(function(res) {
+            $scope.updateStatus = true;
         });
+    };
+    $scope.passwordChanged = function() {
+        var passwordComplexRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([@$!%*?&]*)[A-Za-z\d@$!%*?&]{8,}/;
+        $scope.passwordComplexValidationFailed = !passwordComplexRegex.test($scope.newPassword);
     };
 });
 
@@ -54,7 +59,7 @@ App.controller('HomeController', function ($scope, AccountResource) {
 });
 
 App.controller('EditController', function ($scope, AccountResource, $route) {
-    $scope.nav = ['/home', '/edit'];
+    $scope.updateStatus = false;
     var editAccountId = $route.current.params.id;
     AccountResource.getAccountById(editAccountId).then(function (account) {
         loadAccount(account.data);
@@ -76,6 +81,7 @@ App.controller('EditController', function ($scope, AccountResource, $route) {
     $scope.updateAccount = function() {
         AccountResource.updateAccount($scope.account).then(function (res) {
             $scope.account = res.data;
+            $scope.updateStatus = true;
         }, function (error) {
             $scope.status = 'Error occured on updating new account';
         });
@@ -88,11 +94,19 @@ App.controller('CreateController', function ($scope, AccountResource, $window) {
     $scope.account = {};
 
     $scope.addAccount = function () {
+        if($scope.passwordComplexValidationFailed) {
+            return;
+        }
         AccountResource.addAccount($scope.account).then(function (res) {
             $window.location.href = '/';
         }, function (error) {
             $scope.status = error.data.ModelState.error[0];
         });
-
     };
+
+    $scope.passwordChanged = function() {
+        var passwordComplexRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([@$!%*?&]*)[A-Za-z\d@$!%*?&]{8,}/;
+        $scope.passwordComplexValidationFailed = !passwordComplexRegex.test($scope.account.Password);
+    };
+
 });
