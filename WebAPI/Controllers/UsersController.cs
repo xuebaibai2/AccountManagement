@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
-using WebAPI.DataAccess;
 using WebAPI.DataAccess.Services;
 using WebAPI.Models.database;
 
 namespace WebAPI.Controllers
 {
+    [EnableCors(origins: "*", headers: "", methods: "*")]
     public class UsersController : ApiController
     {
         private UserService userService = new UserService();
