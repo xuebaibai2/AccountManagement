@@ -77,6 +77,11 @@
     <Content Include="index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\app.service.js" />
+    <Content Include="js\Controllers\Create.Controller.js" />
+    <Content Include="js\Controllers\Edit.Controller.js" />
+    <Content Include="js\Controllers\Home.Controller.js" />
+    <Content Include="js\Controllers\Password.Controller.js" />
+    <Content Include="js\dirPagination.js" />
     <Content Include="js\script.js" />
     <Content Include="packages.config" />
     <Content Include="Scripts\angular-animate.js" />
