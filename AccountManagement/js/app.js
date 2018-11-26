@@ -24,11 +24,11 @@ App.config(function ($routeProvider) {
 });
 
 App.controller('PasswordController', function($scope, AccountResource, $route) {
+    $scope.nav = ['/home', '/password'];
     var editAccountId = $route.current.params.id;
     $scope.newPassword = '';
     $scope.resetBtnClicked = function() {
         AccountResource.resetPasswordById(editAccountId, $scope.newPassword).then(function(res) {
-            console.log('password is set', res);
         });
     };
 });
@@ -39,7 +39,6 @@ App.controller('HomeController', function ($scope, AccountResource) {
 
     $scope.deleteAccount = function(id) {
         AccountResource.deleteAccountById(id).then( function (res) {
-            console.log(res);
             var index = $scope.accounts.indexOf(res.data);
             $scope.accounts.splice(index, 1);  
         });
@@ -47,7 +46,6 @@ App.controller('HomeController', function ($scope, AccountResource) {
 
     function getAccounts() {
         AccountResource.getAccounts().then(function (accounts) {
-            console.log(accounts);
             $scope.accounts = accounts.data;
         }, function (error) {
             $scope.status = 'Unable to load account data: ' + error.message;
@@ -56,13 +54,10 @@ App.controller('HomeController', function ($scope, AccountResource) {
 });
 
 App.controller('EditController', function ($scope, AccountResource, $route) {
-
+    $scope.nav = ['/home', '/edit'];
     var editAccountId = $route.current.params.id;
     AccountResource.getAccountById(editAccountId).then(function (account) {
-        // TODO: concider account from response after connect to local web api
-        console.log(account);
         loadAccount(account.data);
-        console.log($scope.account);
     });
 
     function loadAccount (account) {
@@ -96,7 +91,7 @@ App.controller('CreateController', function ($scope, AccountResource, $window) {
         AccountResource.addAccount($scope.account).then(function (res) {
             $window.location.href = '/';
         }, function (error) {
-            $scope.status = 'Error occured on creating new account';
+            $scope.status = error.data.ModelState.error[0];
         });
 
     };

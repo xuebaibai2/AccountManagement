@@ -47,10 +47,14 @@ namespace WebAPI.DataAccess.Services
         {
             using (var db = new AccountContext())
             {
-                db.Users.Add(user);
-                await db.SaveChangesAsync();
+                if(!await db.Users.AnyAsync(x => x.Username == user.Username))
+                {
+                    db.Users.Add(user);
+                    await db.SaveChangesAsync();
 
-                return user;
+                    return user;
+                }
+                return null;
             }
         }
 

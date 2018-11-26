@@ -1,0 +1,23 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body,
+html {
+  height: 100vh;
+  font-family: 'Open Sans', serif !important;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.btn {
+    width: 120px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
+
+button[disabled="disabled"] {
+  opacity: 0.4;
+  cursor: not-allowed !important;
+}

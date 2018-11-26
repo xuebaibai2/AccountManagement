@@ -89,7 +89,11 @@ namespace WebAPI.Controllers
             }
 
             var createdUser = await userService.Post(user);
-
+            if (createdUser == null)
+            {
+                ModelState.AddModelError("error", "username is already exist.");
+                return BadRequest(ModelState);
+            }
             return Ok(createdUser);
         }
 

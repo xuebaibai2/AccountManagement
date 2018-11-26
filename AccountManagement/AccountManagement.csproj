@@ -72,10 +72,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\app.service.js" />
+    <Content Include="js\script.js" />
     <Content Include="packages.config" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -904,6 +906,7 @@
     <Content Include="Views\AccountsView\create.htm" />
     <Content Include="Views\AccountsView\edit.htm" />
     <Content Include="Views\AccountsView\home.htm" />
+    <Content Include="Views\AccountsView\password.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
