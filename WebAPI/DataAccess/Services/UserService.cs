@@ -80,6 +80,38 @@ namespace WebAPI.DataAccess.Services
             }
         }
 
+        public async Task<User> ResetPassword(int id, string newPassword)
+        {
+            using (var db = new AccountContext())
+            {
+                if (!UserExists(id))
+                {
+                    return null;
+                }
+                var user = await db.Users.FindAsync(id);
+                user.Password = newPassword;
+                db.Entry(user).State = EntityState.Modified;
+
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.UserId))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return user;
+            }
+        }
+
         private bool UserExists(int id)
         {
             using (var db = new AccountContext())

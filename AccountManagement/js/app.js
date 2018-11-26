@@ -14,17 +14,34 @@ App.config(function ($routeProvider) {
             templateUrl: 'Views/AccountsView/create.htm',
             controller: 'CreateController'
         })
+        .when('/password', {
+            templateUrl: 'Views/AccountsView/password.htm',
+            controller: 'PasswordController'
+        })
         .otherwise({
             redirectTo: '/home'
         });
 });
 
+App.controller('PasswordController', function($scope, AccountResource, $route) {
+    var editAccountId = $route.current.params.id;
+    $scope.newPassword = '';
+    $scope.resetBtnClicked = function() {
+        AccountResource.resetPasswordById(editAccountId, $scope.newPassword).then(function(res) {
+            console.log('password is set', res);
+        });
+    };
+});
+
 App.controller('HomeController', function ($scope, AccountResource) {
+    $scope.accounts = [];
     getAccounts();
 
     $scope.deleteAccount = function(id) {
         AccountResource.deleteAccountById(id).then( function (res) {
             console.log(res);
+            var index = $scope.accounts.indexOf(res.data);
+            $scope.accounts.splice(index, 1);  
         });
     };
 
@@ -43,6 +60,7 @@ App.controller('EditController', function ($scope, AccountResource, $route) {
     var editAccountId = $route.current.params.id;
     AccountResource.getAccountById(editAccountId).then(function (account) {
         // TODO: concider account from response after connect to local web api
+        console.log(account);
         loadAccount(account.data);
         console.log($scope.account);
     });
@@ -57,6 +75,7 @@ App.controller('EditController', function ($scope, AccountResource, $route) {
         $scope.account.Email = account.Email;
         $scope.account.Phone = account.Phone;
         $scope.account.Mobile = account.Mobile;
+        $scope.account.Password = account.Password;
     }
 
     $scope.updateAccount = function() {

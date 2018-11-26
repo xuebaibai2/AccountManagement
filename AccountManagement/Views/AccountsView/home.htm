@@ -29,6 +29,7 @@
                     <td>{{account.Mobile}}</td>
                     <td>
                         <a href="#!edit?id={{account.UserId}}" class="btn btn-default">Edit</a> | 
+                        <a href="#!password?id={{account.UserId}}" class="btn btn-warning">Reset Password</a> |
                         <button ng-click="deleteAccount(account.UserId)" class="btn btn-danger">Delete</button>
                     </td>
                 </tr>

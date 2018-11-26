@@ -8,7 +8,7 @@ using WebAPI.Models.database;
 
 namespace WebAPI.Controllers
 {
-    [EnableCors(origins: "*", headers: "", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "GET, PUT, POST, DELETE")]
     public class UsersController : ApiController
     {
         private UserService userService = new UserService();
@@ -39,6 +39,7 @@ namespace WebAPI.Controllers
         [Route("api/Users/{id}")]
         public async Task<IHttpActionResult> PutUser(int id, User user)
         {
+            ModelState.Remove("Password");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -55,6 +56,24 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
             return Ok(user);
+        }
+
+        [HttpPut]
+        [ResponseType(typeof(User))]
+        [Route("api/Users/resetpass/{id}/{newPassword}")]
+        public async Task<IHttpActionResult> ResetPassword(int id, string newPassword)
+        {
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                return BadRequest("no empty password is allowed.");
+            }
+            var updatedUser = await userService.ResetPassword(id, newPassword);
+            if(updatedUser == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedUser);
+
         }
 
         // POST: api/Users
