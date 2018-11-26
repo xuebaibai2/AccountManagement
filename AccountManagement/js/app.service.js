@@ -1,27 +1,28 @@
 ﻿var AccountService = angular.module('AccountService', []);
 
 AccountService.factory('AccountResource', function ($http){
-    var baseUrl = "http://demo5365007.mockable.io";
+    var baseUrl = "http://demo5365007.mockable.io/accounts/";
+    var baseUrlPro = "http://localhost:28308/api/users/";
     var AccountResource = {};
 
     AccountResource.getAccounts = function() {
-        return $http.get(baseUrl + '/accounts');
+        return $http.get(baseUrl);
     };
 
     AccountResource.getAccountById = function(accountId) {
-        return $http.get(baseUrl + '/accounts/' + accountId);
+        return $http.get(baseUrl + accountId);
     };
 
     AccountResource.addAccount = function(account) {
-        return $http.post(baseUrl + '/accounts', account);
+        return $http.post(baseUrl, account);
     };
 
     AccountResource.updateAccount = function(account) {
-        return $http.put(baseUrl + '/accounts/' + account.Id, account);
+        return $http.put(baseUrl + account.Id, account);
     };
 
     AccountResource.deleteAccountById = function(accountid) {
-        return $http.delete(baseUrl + '/accounts/' + accountid);
+        return $http.delete(baseUrl + accountid);
     };
 
     return AccountResource;
