@@ -901,18 +901,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AccountsView\create.html" />
-    <Content Include="Views\AccountsView\delete.html" />
-    <Content Include="Views\AccountsView\edit.html" />
-    <Content Include="Views\AccountsView\home.html" />
-    <Content Include="Views\AccountsView\read.html" />
+    <Content Include="Views\AccountsView\create.htm" />
+    <Content Include="Views\AccountsView\edit.htm" />
+    <Content Include="Views\AccountsView\home.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
