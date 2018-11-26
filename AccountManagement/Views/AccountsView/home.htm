@@ -24,7 +24,7 @@
                         <th>Edit</th>
                     </tr>
                 </thead>
-                <tr ng-repeat="account in accounts | filter:textFilter">
+                <tr dir-paginate="account in accounts | filter:textFilter | itemsPerPage: 5 ">
                     <td>{{account.Username}}</td>
                     <td>{{account.Email}}</td>
                     <td>{{account.Firstname}}</td>
@@ -55,6 +55,10 @@
                     </td>
                 </tr>
             </table>
+            <div>
+                <dir-pagination-controls [max-size="5" ] [direction-links="true" ] [boundary-links="true" ]>
+                </dir-pagination-controls>
+            </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-﻿var App = angular.module('App', ['ngRoute', 'AccountService']);
+﻿var App = angular.module('App', ['ngRoute', 'AccountService', 'angularUtils.directives.dirPagination']);
 
 App.config(function ($routeProvider) {
     $routeProvider
