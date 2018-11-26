@@ -5,12 +5,18 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using WebAPI.Helper;
 using WebAPI.Models.database;
 
 namespace WebAPI.DataAccess.Services
 {
     public class UserService : IContextService<User>
     {
+        PasswordHelper passwordHelper;
+        public UserService()
+        {
+            passwordHelper = new PasswordHelper();
+        }
         public async Task<User> Delete(int id)
         {
             using (var db = new AccountContext())
@@ -49,6 +55,7 @@ namespace WebAPI.DataAccess.Services
             {
                 if(!await db.Users.AnyAsync(x => x.Username == user.Username))
                 {
+                    user.Password = getHashedPassword(user.Password);
                     db.Users.Add(user);
                     await db.SaveChangesAsync();
 
@@ -93,7 +100,7 @@ namespace WebAPI.DataAccess.Services
                     return null;
                 }
                 var user = await db.Users.FindAsync(id);
-                user.Password = newPassword;
+                user.Password = getHashedPassword(newPassword);
                 db.Entry(user).State = EntityState.Modified;
 
                 try
@@ -122,6 +129,13 @@ namespace WebAPI.DataAccess.Services
             {
                 return db.Users.Count(e => e.UserId == id) > 0;
             }
+        }
+
+        private string getHashedPassword(string password)
+        {
+            string salt = passwordHelper.CreateSalt(10);
+            string hashedPassword = passwordHelper.GenerateSHA256Hash(password, salt);
+            return string.Concat(salt,hashedPassword);
         }
     }
 }
