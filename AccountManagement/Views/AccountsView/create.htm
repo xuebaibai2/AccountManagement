@@ -1,23 +1,69 @@
 ﻿<div class="row jumbotron">
+    <div ng-show="errorUpdate" class="alert alert-danger">
+        <strong>Error!</strong> {{status}}
+    </div>
     <h1 class="text-center">Create Account</h1>
     <hr>
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <form>
+        <div class="col-md-12">
+            <form name="createForm">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" ng-model="username" class="form-control input-lg">
+                    <input id="username" type="text" name="username" ng-model="account.Username" class="form-control input-lg"
+                        ng-required="true">
+                    <h5 class="text-danger" ng-show="createForm.username.$touched && createForm.username.$invalid">The
+                        Username is required.</h5>
                 </div>
                 <div class="form-group">
-                    <label for="username">Password</label>
-                    <input type="password" ng-model="password" class="form-control input-lg">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password" ng-model="account.Password" class="form-control input-lg"
+                        ng-required="true" ng-change="passwordChanged()">
+                    <h5 class="text-danger" ng-show="createForm.password.$touched && createForm.password.$invalid">The
+                        Password is required.</h5>
+                    <h5 class="text-danger" ng-show="passwordComplexValidationFailed">
+                        Password should be minimun 8 character in length, contain both letters and numbers, at least
+                        one uppercase letter.
+                    </h5>
                 </div>
                 <div class="form-group">
-                    <label for="username">Email</label>
-                    <input type="email" ng-model="email" class="form-control input-lg">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" name="email" ng-model="account.Email" class="form-control input-lg"
+                        ng-required="true">
+                    <h5 class="text-danger" ng-show="createForm.email.$touched && createForm.email.$error.required">The
+                        Email is required.</h5>
+                    <h5 class="text-danger" ng-show="createForm.email.$error.email">Please enter correct email format.</h5>
                 </div>
-
-                <button ng-click="addAccount()" class="btn btn-info form-control input-lg">Create</button>
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input id="firstname" type="text" name="firstname" ng-model="account.Firstname" class="form-control input-lg"
+                        ng-required="true">
+                    <h5 class="text-danger" ng-show="createForm.firstname.$touched && createForm.firstname.$invalid">The
+                        Firstname is required.</h5>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input id="lastname" type="text" name="lastname" ng-model="account.Lastname" class="form-control input-lg"
+                        ng-required="true">
+                    <h5 class="text-danger" ng-show="createForm.lastname.$touched && createForm.lastname.$invalid">The
+                        Lastname is required.</h5>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Data of Birth</label>
+                    <div flex-gt-xs>
+                            <md-datepicker id="dob" ng-model="account.DateOfBirth" md-current-view="year" md-placeholder="Enter date" ng-change="dobChanged()"></md-datepicker>
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="text" ng-model="account.Phone" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile</label>
+                    <input id="mobile" type="text" ng-model="account.Mobile" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <button ng-click="addAccount()" class="btn btn-info form-control input-lg" ng-disabled="createForm.$invalid || passwordComplexValidationFailed">Create</button>
+                </div>
             </form>
         </div>
     </div>

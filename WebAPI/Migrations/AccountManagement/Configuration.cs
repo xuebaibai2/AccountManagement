@@ -28,32 +28,6 @@ namespace WebAPI.Migrations.AccountManagement
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            var dummyUsers = new User[]
-            {
-                new User()
-                {
-                    Username = "Dummy Account 1",
-                    Firstname = "Tom",
-                    Lastname = "Jerry",
-                    Password = "987654321",
-                    DateOfBirth = new DateTime(2000, 1, 1),
-                    Email = "tom@dummy.com",
-                    Phone = "123456789",
-                    Mobile = "987654321"
-                },
-                 new User()
-                {
-                    Username = "Dummy Account 2",
-                    Firstname = "James",
-                    Lastname = "Doe",
-                    Password = "987654321",
-                    DateOfBirth = new DateTime(2001, 1, 1),
-                    Email = "james@dummy.com",
-                    Phone = "888555222",
-                    Mobile = "159753468"
-                }
-            };
-            context.Users.AddOrUpdate(dummyUsers);
         }
     }
 }

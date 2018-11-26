@@ -146,6 +146,9 @@
     <EmbeddedResource Include="Migrations\AccountManagement\201811260246096_Updte_User_SetNull_DateOfBirth.resx">
       <DependentUpon>201811260246096_Updte_User_SetNull_DateOfBirth.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AccountManagement\201811260937167_Updte_User_ColumnType_DateOfBirth.resx">
+      <DependentUpon>201811260937167_Updte_User_ColumnType_DateOfBirth.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\UsersController.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\PasswordHelper.cs" />
     <Compile Include="Migrations\AccountManagement\201811260241020_AddTable_User.cs" />
     <Compile Include="Migrations\AccountManagement\201811260241020_AddTable_User.Designer.cs">
       <DependentUpon>201811260241020_AddTable_User.cs</DependentUpon>
@@ -167,6 +171,10 @@
     <Compile Include="Migrations\AccountManagement\201811260246096_Updte_User_SetNull_DateOfBirth.cs" />
     <Compile Include="Migrations\AccountManagement\201811260246096_Updte_User_SetNull_DateOfBirth.Designer.cs">
       <DependentUpon>201811260246096_Updte_User_SetNull_DateOfBirth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AccountManagement\201811260937167_Updte_User_ColumnType_DateOfBirth.cs" />
+    <Compile Include="Migrations\AccountManagement\201811260937167_Updte_User_ColumnType_DateOfBirth.Designer.cs">
+      <DependentUpon>201811260937167_Updte_User_ColumnType_DateOfBirth.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AccountManagement\Configuration.cs" />
     <Compile Include="Models\database\User.cs" />

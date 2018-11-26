@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPI.Models.database
 {
@@ -23,7 +21,7 @@ namespace WebAPI.Models.database
         [Required]
         public string Lastname { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        [DataType(DataType.Date)]
+        [Column(TypeName = "date")]
         public DateTime? DateOfBirth { get; set; }
         [MaxLength(256)]
         [Required]

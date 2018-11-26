@@ -5,12 +5,18 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using WebAPI.Helper;
 using WebAPI.Models.database;
 
 namespace WebAPI.DataAccess.Services
 {
     public class UserService : IContextService<User>
     {
+        PasswordHelper passwordHelper;
+        public UserService()
+        {
+            passwordHelper = new PasswordHelper();
+        }
         public async Task<User> Delete(int id)
         {
             using (var db = new AccountContext())
@@ -47,10 +53,15 @@ namespace WebAPI.DataAccess.Services
         {
             using (var db = new AccountContext())
             {
-                db.Users.Add(user);
-                await db.SaveChangesAsync();
+                if(!await db.Users.AnyAsync(x => x.Username == user.Username))
+                {
+                    user.Password = getHashedPassword(user.Password);
+                    db.Users.Add(user);
+                    await db.SaveChangesAsync();
 
-                return user;
+                    return user;
+                }
+                return null;
             }
         }
 
@@ -80,12 +91,51 @@ namespace WebAPI.DataAccess.Services
             }
         }
 
+        public async Task<User> ResetPassword(int id, string newPassword)
+        {
+            using (var db = new AccountContext())
+            {
+                if (!UserExists(id))
+                {
+                    return null;
+                }
+                var user = await db.Users.FindAsync(id);
+                user.Password = getHashedPassword(newPassword);
+                db.Entry(user).State = EntityState.Modified;
+
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UserExists(user.UserId))
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return user;
+            }
+        }
+
         private bool UserExists(int id)
         {
             using (var db = new AccountContext())
             {
                 return db.Users.Count(e => e.UserId == id) > 0;
             }
+        }
+
+        private string getHashedPassword(string password)
+        {
+            string salt = passwordHelper.CreateSalt(10);
+            string hashedPassword = passwordHelper.GenerateSHA256Hash(password, salt);
+            return string.Concat(salt,hashedPassword);
         }
     }
 }

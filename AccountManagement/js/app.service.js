@@ -18,12 +18,16 @@ AccountService.factory('AccountResource', function ($http){
     };
 
     AccountResource.updateAccount = function(account) {
-        return $http.put(baseUrl + account.Id, account);
+        return $http.put(baseUrl + account.UserId, account);
     };
 
-    AccountResource.deleteAccountById = function(accountid) {
-        return $http.delete(baseUrl + accountid);
+    AccountResource.deleteAccountById = function(accountId) {
+        return $http.delete(baseUrl + accountId);
     };
+
+    AccountResource.resetPasswordById = function(accountId, newPassword) {
+        return $http.put(baseUrl + 'resetpass/' + accountId + '/'+ newPassword);
+    }
 
     return AccountResource;
 });
