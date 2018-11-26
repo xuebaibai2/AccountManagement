@@ -1,4 +1,4 @@
-﻿var App = angular.module('App', ['ngRoute', 'AccountService', 'angularUtils.directives.dirPagination']);
+﻿var App = angular.module('App', ['ngRoute', 'AccountService', 'angularUtils.directives.dirPagination', 'ngMaterial', 'ngMessages']);
 
 App.config(function ($routeProvider) {
     $routeProvider
@@ -59,8 +59,14 @@ App.controller('HomeController', function ($scope, AccountResource) {
 });
 
 App.controller('EditController', function ($scope, AccountResource, $route) {
-    $scope.updateStatus = false;
+    this.myDate = new Date();
+    this.isOpen = false;
+
     var editAccountId = $route.current.params.id;
+
+    $scope.updateStatus = false;
+    $scope.updateAccountLoading = false;
+
     AccountResource.getAccountById(editAccountId).then(function (account) {
         loadAccount(account.data);
     });
@@ -79,27 +85,35 @@ App.controller('EditController', function ($scope, AccountResource, $route) {
     }
 
     $scope.updateAccount = function() {
+        $scope.updateAccountLoading = true;
         AccountResource.updateAccount($scope.account).then(function (res) {
             $scope.account = res.data;
             $scope.updateStatus = true;
+            $scope.updateAccountLoading = false;
         }, function (error) {
             $scope.status = 'Error occured on updating new account';
         });
     };
 
+    $scope.dobChanged = function() {
+        $scope.account.DateOfBirth.setMinutes(($scope.account.DateOfBirth.getTimezoneOffset() * -1));
+    };
+
 });
 
 App.controller('CreateController', function ($scope, AccountResource, $window) {
-
     $scope.account = {};
+    $scope.errorUpdate = false;
 
     $scope.addAccount = function () {
+        $scope.errorUpdate = false;
         if($scope.passwordComplexValidationFailed) {
             return;
         }
         AccountResource.addAccount($scope.account).then(function (res) {
             $window.location.href = '/';
         }, function (error) {
+            $scope.errorUpdate = true;
             $scope.status = error.data.ModelState.error[0];
         });
     };
@@ -109,4 +123,7 @@ App.controller('CreateController', function ($scope, AccountResource, $window) {
         $scope.passwordComplexValidationFailed = !passwordComplexRegex.test($scope.account.Password);
     };
 
+    $scope.dobChanged = function() {
+        $scope.account.DateOfBirth.setMinutes(($scope.account.DateOfBirth.getTimezoneOffset() * -1));
+    };
 });

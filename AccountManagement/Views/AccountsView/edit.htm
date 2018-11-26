@@ -5,14 +5,15 @@
         </span>
     </div>
     <div ng-show="updateStatus" class="alert alert-success">
-            <strong>Success</strong> Account updated
+        <strong>Success</strong> Account updated
     </div>
     <h1 class="text-center">Edit Account</h1>
     <hr>
+
     <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3">
             <form name="editForm">
-            <div class="form-group">
+                <div class="form-group">
                     <label for="username">Username</label>
                     <input id="username" type="text" name="username" ng-model="account.Username" class="form-control input-lg"
                         disabled>
@@ -41,7 +42,9 @@
                 </div>
                 <div class="form-group">
                     <label for="dob">Data of Birth</label>
-                    <input id="dob" type="text" ng-model="account.DateOfBirth" class="form-control input-lg">
+                    <div flex-gt-xs>
+                        <md-datepicker id="dob" ng-model="account.DateOfBirth" md-current-view="year" md-placeholder="Enter date" ng-change="dobChanged()"></md-datepicker>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
@@ -52,7 +55,14 @@
                     <input id="mobile" type="text" ng-model="account.Mobile" class="form-control input-lg">
                 </div>
                 <div class="form-group">
-                        <button ng-click="updateAccount()" class="btn btn-primary" ng-disabled="editForm.$invalid">Update</button>
+                    <div layout="row" layout-sm="column" layout-align="space-around">
+                        <button ng-click="updateAccount()" class="btn btn-primary" ng-disabled="editForm.$invalid">
+                            <span ng-show="!updateAccountLoading">Update</span>
+                            <md-progress-circular class="md-accent md-hue-1" md-diameter="20px" ng-show="updateAccountLoading"
+                                md-mode="indeterminate"></md-progress-circular>
+
+                        </button>
+                    </div>
                 </div>
                 </tr>
             </form>
