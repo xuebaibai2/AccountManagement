@@ -49,7 +49,7 @@ App.controller('EditController', function ($scope, AccountResource, $route) {
 
     function loadAccount (account) {
         $scope.account = {};
-        $scope.account.Id = account.Id;
+        $scope.account.UserId = account.UserId;
         $scope.account.Username = account.Username;
         $scope.account.Firstname = account.Firstname;
         $scope.account.Lastname = account.Lastname;
