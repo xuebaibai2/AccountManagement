@@ -6,16 +6,38 @@
             <form>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" ng-model="username" class="form-control input-lg">
+                    <input type="text" ng-model="account.Username" class="form-control input-lg">
                 </div>
                 <div class="form-group">
                     <label for="username">Password</label>
-                    <input type="password" ng-model="password" class="form-control input-lg">
+                    <input type="password" ng-model="account.Password" class="form-control input-lg">
                 </div>
                 <div class="form-group">
                     <label for="username">Email</label>
-                    <input type="email" ng-model="email" class="form-control input-lg">
+                    <input type="email" ng-model="account.Email" class="form-control input-lg">
                 </div>
+                <div class="form-group">
+                    <label for="username">Firstname</label>
+                    <input type="text" ng-model="account.Firstname" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <label for="username">Lastname</label>
+                    <input type="text" ng-model="account.Lastname" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="text" ng-model="account.DateOfBirth" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <label for="username">Phone</label>
+                    <input type="text" ng-model="account.Phone" class="form-control input-lg">
+                </div>
+                <div class="form-group">
+                    <label for="username">Mobile</label>
+                    <input type="text" ng-model="account.Mobile" class="form-control input-lg">
+                </div>
+
+
 
                 <button ng-click="addAccount()" class="btn btn-info form-control input-lg">Create</button>
             </form>

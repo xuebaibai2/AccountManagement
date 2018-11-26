@@ -88,19 +88,13 @@ App.controller('EditController', function ($scope, AccountResource, $route) {
 
 });
 
-App.controller('CreateController', function ($scope, AccountResource) {
+App.controller('CreateController', function ($scope, AccountResource, $window) {
 
     $scope.account = {};
 
     $scope.addAccount = function () {
-        var account = {
-            'username': $scope.account.username,
-            'password': $scope.account.password,
-            'email': $scope.email
-        };
-
-        AccountResource.addAccount(account).then(function (res) {
-            console.log(res);
+        AccountResource.addAccount($scope.account).then(function (res) {
+            $window.location.href = '/';
         }, function (error) {
             $scope.status = 'Error occured on creating new account';
         });
